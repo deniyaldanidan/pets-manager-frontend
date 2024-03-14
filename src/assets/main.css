@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  * {
+    @apply box-border font-poppins font-normal not-italic;
+  }
+
+  input,
+  select {
+    @apply rounded-md bg-[#313a39] px-3 py-1.5 text-lg text-white placeholder:text-[#bbb] focus:bg-[#414a49] outline-none;
+  }
+
+  input[type=checkbox] {
+    @apply w-4 h-4;
+  }
+}
+
+@layer components {
+  
+}
