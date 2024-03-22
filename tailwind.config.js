@@ -19,6 +19,7 @@ export default {
       colors: {
         "foreground": "#1a0a02",
         "secFg": "#2a1a12",
+        "terFg": "#3a2a22",
         "background": "#faf4f1",
         "secBg": "#f1ede7",
         "terBg": "#eae4e1",

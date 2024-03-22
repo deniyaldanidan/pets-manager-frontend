@@ -15,6 +15,7 @@ let menuClasses = "text-lg capitalize duration-150 hover:underline hover:underli
         <RouterLink to="/" :class="menuClasses">Home</RouterLink>
         <RouterLink to="/about" :class="menuClasses">About</RouterLink>
         <RouterLink to="/login" :class="menuClasses">Login</RouterLink>
+        <RouterLink to="/register" :class="menuClasses">Register</RouterLink>
         <RouterLink to="/adopt-a-pet"
           class="text-lg capitalize bg-primary px-8 py-1.5 font-medium rounded-lg duration-150 hover:bg-accent hover:text-background active:scale-90">
           Adopt A Pet

@@ -13,7 +13,7 @@
 
   input,
   select {
-    @apply rounded-md bg-[#313a39] px-3 py-1.5 text-lg text-white placeholder:text-[#bbb] focus:bg-[#414a49] outline-none;
+    @apply w-full bg-transparent outline-none border-b-2 border-b-[#4a3a22] px-1.5 text-base text-terFg placeholder:text-[#4a3a22] duration-150 focus:border-foreground focus:text-foreground;
   }
 
   input[type=checkbox] {
@@ -22,5 +22,11 @@
 }
 
 @layer components {
-  
+  .error-text{
+    @apply text-red-600 text-sm font-medium;
+  }
+
+  .submit-BTN{
+    @apply bg-primary py-2 w-full block text-lg font-medium rounded-lg duration-200 hover:bg-accent hover:text-background active:scale-105;
+  }
 }
