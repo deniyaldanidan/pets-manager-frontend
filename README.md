@@ -19,6 +19,6 @@
     - [x] Handling Errors
     - [x] Sending data to API
 
-  - [ ] Implement Auth Store
-  - [ ] Show Auth Status in Header
+  - [x] Implement Auth Store
+  - [x] Show Auth Status in Header
   - [ ] Protect the routes (with or without Roles)

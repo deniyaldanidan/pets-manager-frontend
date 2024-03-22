@@ -2,10 +2,13 @@
 import myAxios from '@/api/myAxios';
 import registerIllus from '@/assets/images/register.svg';
 import InputGroupComp from '@/components/inputGroup/InputGroupComp.vue';
+import { useAuthStore } from '@/stores/auth';
 import { AxiosError } from 'axios';
 import validator from 'validator';
 import { ref } from 'vue';
 import { z } from 'zod';
+
+const { setAuth } = useAuthStore();
 
 const name = ref("");
 const username = ref("");
@@ -58,7 +61,13 @@ async function onSubmitHandler() {
 
     try {
         const res = await myAxios.post("/auth/register", parsedVals.data);
-        console.log(res.data)
+        // console.log(res.data)
+        const accToken = res.data?.accessToken;
+        if (typeof accToken !== "string") {
+            errors.value.root = "Login Failed"
+            return;
+        }
+        setAuth(accToken);
     } catch (error) {
         if (error instanceof AxiosError) {
             if (error?.response?.status === 409) {

@@ -6,6 +6,10 @@ import validator from 'validator';
 import { z } from 'zod';
 import myAxios from '@/api/myAxios';
 import { AxiosError } from 'axios';
+import { useAuthStore } from '@/stores/auth';
+
+
+const { setAuth } = useAuthStore();
 
 const usernameOrEmail = ref("");
 const password = ref("");
@@ -40,8 +44,12 @@ async function onSubmitHandler() {
     }
     try {
         const res = await myAxios.post("/auth/login", parsedVals.data);
-        console.log(res.data);
-
+        const accToken = res.data?.accessToken;
+        if (typeof accToken !== "string") {
+            errors.value.root = "Login Failed"
+            return;
+        }
+        setAuth(accToken);
     } catch (error) {
         if (error instanceof AxiosError) {
             if (error?.response?.status === 409) {
@@ -49,7 +57,7 @@ async function onSubmitHandler() {
                 return;
             }
         }
-        errors.value.root = "login Failed";
+        errors.value.root = "Login Failed";
     }
 }
 </script>
