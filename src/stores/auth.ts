@@ -19,29 +19,34 @@ const accessPayloadParser = z.object({
   role: z.enum(['USER', 'ADMIN'])
 })
 
-const initialAuthState: { auth: false } = { auth: false }
+export const unAuthState = { auth: false as const }
+const loadingState = { auth: 'loading' as const }
 
 export const useAuthStore = defineStore('auth', () => {
   const accessToken = ref('')
 
-  const authValues = ref<(z.infer<typeof accessPayloadParser> & { auth: true }) | { auth: false }>(
-    initialAuthState
-  )
+  const authValues = ref<
+    (z.infer<typeof accessPayloadParser> & { auth: true }) | { auth: false | 'loading' }
+  >(loadingState)
 
-  watch(accessToken, () => {
-    try {
-      if (!validator.isJWT(accessToken.value)) {
-        authValues.value = { ...initialAuthState }
+  watch(
+    accessToken,
+    () => {
+      try {
+        if (!validator.isJWT(accessToken.value)) {
+          authValues.value = { ...unAuthState }
+          return
+        }
+        const parsedVals = accessPayloadParser.parse(jwtDecode(accessToken.value))
+        authValues.value = { ...parsedVals, auth: true }
+        return true
+      } catch (error) {
+        authValues.value = { ...unAuthState }
         return
       }
-      const parsedVals = accessPayloadParser.parse(jwtDecode(accessToken.value))
-      authValues.value = { ...parsedVals, auth: true }
-      return true
-    } catch (error) {
-      authValues.value = { ...initialAuthState }
-      return
-    }
-  })
+    },
+    { immediate: false }
+  )
 
   function setAuth(token: string) {
     if (validator.isJWT(token)) {

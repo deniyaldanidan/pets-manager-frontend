@@ -2,8 +2,6 @@
 import { RouterView } from 'vue-router';
 import HeaderComp from './components/header/HeaderComp.vue';
 
-
-
 </script>
 
 <template>
@@ -14,7 +12,8 @@ import HeaderComp from './components/header/HeaderComp.vue';
       <RouterView />
     </main>
 
-    <footer class="text-center text-sm bg-secBg text-secFg px-myspace pt-5 pb-3 border-t-2 border-solid border-border">
+    <footer
+      class="text-center text-sm bg-background text-secFg px-myspace pt-5 pb-3 border-t-2 border-solid border-border">
       &copy; 2024. Dani's Products. All rights reserved.
     </footer>
   </div>

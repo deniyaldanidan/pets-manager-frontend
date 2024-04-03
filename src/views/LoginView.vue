@@ -7,8 +7,10 @@ import { z } from 'zod';
 import myAxios from '@/api/myAxios';
 import { AxiosError } from 'axios';
 import { useAuthStore } from '@/stores/auth';
+import { useRouter } from 'vue-router';
 
 
+const router = useRouter()
 const { setAuth } = useAuthStore();
 
 const usernameOrEmail = ref("");
@@ -50,6 +52,7 @@ async function onSubmitHandler() {
             return;
         }
         setAuth(accToken);
+        router.push({ name: 'home' });
     } catch (error) {
         if (error instanceof AxiosError) {
             if (error?.response?.status === 409) {
@@ -63,9 +66,9 @@ async function onSubmitHandler() {
 </script>
 
 <template>
-    <div class="border-[2px] rounded-xl w-full max-w-4xl mx-auto overflow-hidden flex my-myspace">
+    <div class="border-[2px] rounded-xl w-full max-w-4xl mx-auto overflow-hidden flex my-10">
 
-        <form @submit.prevent="onSubmitHandler" class="w-full py-myspace px-10 flex flex-col gap-y-6">
+        <form @submit.prevent="onSubmitHandler" class="w-full py-myspace px-10 flex flex-col gap-y-6 bg-terBg">
             <div class="flex flex-col gap-y-1.5 mb-1.5">
                 <h1 class="text-center text-3xl font-playfair font-medium capitalize">Welcome back</h1>
                 <p class="error-text text-center">{{ errors.root }}</p>
@@ -82,6 +85,6 @@ async function onSubmitHandler() {
             </p>
         </form>
         <img :src="loginIllus" alt="Login Illustration"
-            class="w-[45%] min-h-full object-contain object-center bg-terBg" />
+            class="w-[45%] min-h-full object-contain object-center bg-secBg" />
     </div>
 </template>
