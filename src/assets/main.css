@@ -12,8 +12,20 @@
   }
 
   input,
-  select {
-    @apply w-full bg-transparent outline-none border-b-2 border-b-[#4a3a22] px-1.5 text-base text-terFg placeholder:text-[#4a3a22] duration-150 focus:border-foreground focus:text-foreground;
+  select,textarea {
+    @apply w-full bg-transparent outline-none border-b-2 border-b-[#4a3a22] px-1.5 text-lg text-terFg placeholder:text-[#4a3a22] duration-150 focus:border-foreground focus:text-foreground;
+  }
+
+  select{
+    @apply capitalize;
+  }
+
+  select>option{
+    @apply capitalize text-base max-h-80;
+  }
+
+  textarea{
+    @apply border-2 border-[#4a3a22] py-1.5 px-2 rounded-lg;
   }
 
   input[type=checkbox] {
@@ -28,5 +40,13 @@
 
   .submit-BTN{
     @apply bg-primary py-2 w-full block text-lg font-medium rounded-lg duration-200 hover:bg-accent hover:text-background active:scale-105;
+  }
+
+  .inp-grp-label{
+    @apply text-lg font-medium capitalize;
+  }
+
+  .inp-grp{
+    @apply flex flex-col gap-y-1;
   }
 }

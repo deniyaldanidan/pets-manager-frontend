@@ -42,7 +42,8 @@ async function logout() {
                 <RouterLink to="/register" :class="menuClasses">Register</RouterLink>
             </template>
             <template v-else-if="authStore.authValues.auth === true">
-                <RouterLink to="/" :class="menuClasses">Hello, {{ authStore.authValues.name }}</RouterLink>
+                <RouterLink :to="{ name: 'user-dashboard' }" :class="menuClasses">Hi, {{ authStore.authValues.name }}
+                </RouterLink>
                 <RouterLink to="/admin" :class="menuClasses" v-if="authStore.authValues.role === 'ADMIN'">Admin Panel
                 </RouterLink>
                 <button :class="menuClasses" @click="logout">Logout</button>

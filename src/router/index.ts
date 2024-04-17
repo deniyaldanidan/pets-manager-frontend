@@ -14,6 +14,14 @@ import { useAuthStore } from '@/stores/auth'
 import NotFoundView from '@/views/NotFoundView.vue'
 import LoadingView from '@/views/LoadingView.vue'
 import BreedManageView from '@/views/BreedManageView.vue'
+import RehomeAPetView from '@/views/RehomeAPetView.vue'
+import EditRehomeAPetView from '@/views/EditRehomeAPetView.vue'
+import UserDashboardView from '@/views/UserDashboardView.vue'
+import UserProfileView from '@/views/UserProfileView.vue'
+import MyPetsView from '@/views/MyPetsView.vue'
+import MyPetView from '@/views/MyPetView.vue'
+import AdminPetView from '@/views/AdminPetView.vue'
+import ViewPetView from '@/views/ViewPetView.vue'
 
 const RESTRICTNOTADMIN = (to: RouteLocationNormalized): RouteLocationRaw | undefined => {
   const authStore = useAuthStore()
@@ -78,6 +86,11 @@ const router = createRouter({
       component: AdoptPetView
     },
     {
+      path: '/pet/view/:petId',
+      name: 'view-pet',
+      component: ViewPetView
+    },
+    {
       path: '/login',
       name: 'login',
       component: LoginView,
@@ -107,6 +120,34 @@ const router = createRouter({
           }
         }
       ]
+    },
+    {
+      path: '/admin/pet-view/:petId',
+      name: 'admin-pet-view',
+      component: AdminPetView,
+      beforeEnter: RESTRICTNOTADMIN
+    },
+    {
+      path: '/user-dashboard',
+      component: UserDashboardView,
+      beforeEnter: RESTRICTGUEST,
+      children: [
+        { path: '', name: 'user-dashboard', component: UserProfileView },
+        { path: 'my-pets', name: 'my-pets', component: MyPetsView },
+        { path: '/my-pets/:petId', name: 'view-my-pet', component: MyPetView }
+      ]
+    },
+    {
+      path: '/rehome-a-pet',
+      name: 'rehome-a-pet',
+      component: RehomeAPetView,
+      beforeEnter: RESTRICTGUEST
+    },
+    {
+      path: '/edit-pet/:petId',
+      name: 'edit-pet-info',
+      component: EditRehomeAPetView,
+      beforeEnter: RESTRICTGUEST
     },
     {
       path: '/loading',

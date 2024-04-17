@@ -154,7 +154,8 @@ async function deleteFN(slug: string) {
         <div class="fixed top-0 left-0 z-40 bg-black opacity-70 w-screen h-screen" />
         <form @submit.prevent="submitHandler"
             class="block fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-terBg border-[2px] w-screen h-fit max-w-96 min-w-fit mx-auto px-6 py-7 rounded-md">
-            <h2 class="capitalize text-left text-xl font-medium">{{ operationType.toLowerCase() }}
+            <h2 class="capitalize text-xl font-bold">
+                {{ operationType.toLowerCase() }}
                 {{ (route.params.breed as string).toLowerCase() }}
                 Breed
             </h2>
